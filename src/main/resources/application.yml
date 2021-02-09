@@ -1,0 +1,10 @@
+spring:
+  task:
+    scheduling:
+      pool:
+        size: 3
+aliyun:
+  access-key: shagou
+  secret-key: shagou
+  domain: shagou
+  execute-interval: 60000

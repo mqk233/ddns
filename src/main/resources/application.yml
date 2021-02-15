@@ -6,5 +6,5 @@ spring:
 aliyun:
   access-key: shagou
   secret-key: shagou
-  domain: shagou
+  domains: shagou
   execute-interval: 60000

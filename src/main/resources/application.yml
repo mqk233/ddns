@@ -1,5 +1,9 @@
 aliyun:
+  # The access-key of aliyun
   access-key: shagou
+  # The secret-key of aliyun
   secret-key: shagou
+  # Your domains
   domains: shagou
+  # The interval of update
   execute-interval: 60000

@@ -24,28 +24,29 @@ import java.util.stream.Collectors;
 /**
  * 动态域名解析定时器
  *
+ * @author mqk233
  * @since 2021-02-09
  */
 @Configuration
-public class DynamicDNSSchedule {
+public class DynamicDNSSchedules {
     @Value("${aliyun.access-key}")
-    private String aliAccessKey;
+    private String aliyunAccessKey;
 
     @Value("${aliyun.secret-key}")
-    private String aliSecretKey;
+    private String aliyunSecretKey;
 
     @Value("${aliyun.domains}")
     private List<String> domains;
 
     @Scheduled(fixedDelayString = "${aliyun.execute-interval}")
-    public void aliDynamicDNS() throws Exception {
+    public void aliyunDynamicDNS() throws Exception {
         for (String domain : domains.stream().filter(tmpDomain -> tmpDomain.contains(".")).collect(Collectors.toList())) {
             String[] domainWords = domain.split("\\.");
             int domainWordsLength = domainWords.length;
             boolean isMainDomain = domainWordsLength == 2;
             String currentDomainName = isMainDomain ? domain : domainWords[domainWordsLength - 2] + "." + domainWords[domainWordsLength - 1];
             String currentRRKeyWord = isMainDomain ? "@" : domain.split("." + currentDomainName)[0];
-            IAcsClient client = new DefaultAcsClient(DefaultProfile.getProfile("", aliAccessKey, aliSecretKey));
+            IAcsClient client = new DefaultAcsClient(DefaultProfile.getProfile("", aliyunAccessKey, aliyunSecretKey));
             // 查询指定二级域名的最新解析记录
             DescribeDomainRecordsRequest describeDomainRecordsRequest = new DescribeDomainRecordsRequest();
             // 主域名

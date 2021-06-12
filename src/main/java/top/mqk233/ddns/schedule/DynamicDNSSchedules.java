@@ -82,7 +82,7 @@ public class DynamicDNSSchedules {
         try {
             describeDomainRecordsResponse = client.getAcsResponse(describeDomainRecordsRequest);
         } catch (ClientException e) {
-            System.out.printf("查询域名”%s“解析记录失败：%s%n", originDomain, e.getMessage());
+            System.out.printf("查询”%s“解析记录失败：%s%n", originDomain, e.getMessage());
             return;
         }
 
@@ -106,7 +106,7 @@ public class DynamicDNSSchedules {
                     client.getAcsResponse(updateDomainRecordRequest);
                     System.out.printf("”%s“解析记录更新成功：”%s“ ------> ”%s“%n", originDomain, lastHostIp, currentHostIP);
                 } catch (ClientException e) {
-                    System.out.printf("更新域名”%s“解析记录失败：%s%n", originDomain, e.getMessage());
+                    System.out.printf("更新”%s“解析记录失败：%s%n", originDomain, e.getMessage());
                 }
             }
         } else {
@@ -125,7 +125,7 @@ public class DynamicDNSSchedules {
                 client.getAcsResponse(addDomainRecordRequest);
                 System.out.printf("”%s“解析记录新增成功：”%s“%n", originDomain, currentHostIP);
             } catch (ClientException e) {
-                System.out.printf("新增域名”%s“解析记录失败：%s%n", originDomain, e.getMessage());
+                System.out.printf("新增”%s“解析记录失败：%s%n", originDomain, e.getMessage());
             }
         }
     }

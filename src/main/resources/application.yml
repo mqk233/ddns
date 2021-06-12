@@ -1,9 +1,8 @@
+# 阿里云配置
 aliyun:
-  # The access-key of aliyun
-  access-key: shagou
-  # The secret-key of aliyun
-  secret-key: shagou
-  # Your domains
-  domains: shagou
-  # The interval of update
-  execute-interval: 60000
+  # AccessKey ID
+  access-key: ...
+  # AccessKey Secret
+  secret-key: ...
+  # 更新域名解析的间隔(毫秒)
+  update-interval: 60000

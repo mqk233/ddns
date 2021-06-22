@@ -53,7 +53,7 @@ public class DynamicDNSSchedules {
         // 主域名
         String domain = String.valueOf(InternetDomainName.from(originDomain).topPrivateDomain());
         // 子域名
-        String subdomain = domain.equals(originDomain) ? "@" : originDomain.replace("." + originDomain, "");
+        String subdomain = domain.equals(originDomain) ? "@" : originDomain.replace("." + domain, "");
 
         // 获取本机地址
         StringBuilder responseResult = new StringBuilder();

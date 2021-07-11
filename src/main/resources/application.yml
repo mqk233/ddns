@@ -1,8 +1,8 @@
 # 阿里云配置
 aliyun:
   # AccessKey ID
-  access-key: ...
+  access-key-id: *
   # AccessKey Secret
-  secret-key: ...
+  access-key-secret: *
   # 更新域名解析的间隔(毫秒)
   update-interval: 60000

@@ -56,11 +56,11 @@ public class AliyunDNSSchedule {
         String originDomain = arguments.getSourceArgs()[0];
 
         // 获取域名信息
-        GetMainDomainNameResponse mainDomainNameResponse;
+        GetMainDomainNameResponse getMainDomainNameResponse;
         try {
-            GetMainDomainNameRequest mainDomainNameRequest = new GetMainDomainNameRequest();
-            mainDomainNameRequest.setInputString(originDomain);
-            mainDomainNameResponse = client.getAcsResponse(mainDomainNameRequest);
+            GetMainDomainNameRequest getMainDomainNameRequest = new GetMainDomainNameRequest();
+            getMainDomainNameRequest.setInputString(originDomain);
+            getMainDomainNameResponse = client.getAcsResponse(getMainDomainNameRequest);
         } catch (ClientException e) {
             System.out.printf("域名“%s”输入有误：%s%n", originDomain, e.getMessage());
             return;
@@ -88,8 +88,8 @@ public class AliyunDNSSchedule {
         DescribeDomainRecordsResponse describeDomainRecordsResponse;
         try {
             DescribeDomainRecordsRequest describeDomainRecordsRequest = new DescribeDomainRecordsRequest();
-            describeDomainRecordsRequest.setDomainName(mainDomainNameResponse.getDomainName());
-            describeDomainRecordsRequest.setRRKeyWord(mainDomainNameResponse.getRR());
+            describeDomainRecordsRequest.setDomainName(getMainDomainNameResponse.getDomainName());
+            describeDomainRecordsRequest.setRRKeyWord(getMainDomainNameResponse.getRR());
             describeDomainRecordsRequest.setType("A");
             describeDomainRecordsResponse = client.getAcsResponse(describeDomainRecordsRequest);
         } catch (ClientException e) {
@@ -101,8 +101,8 @@ public class AliyunDNSSchedule {
         if (describeDomainRecordsResponse.getTotalCount() != 1) {
             try {
                 AddDomainRecordRequest addDomainRecordRequest = new AddDomainRecordRequest();
-                addDomainRecordRequest.setDomainName(mainDomainNameResponse.getDomainName());
-                addDomainRecordRequest.setRR(mainDomainNameResponse.getRR());
+                addDomainRecordRequest.setDomainName(getMainDomainNameResponse.getDomainName());
+                addDomainRecordRequest.setRR(getMainDomainNameResponse.getRR());
                 addDomainRecordRequest.setType("A");
                 addDomainRecordRequest.setValue(localAddress);
                 client.getAcsResponse(addDomainRecordRequest);
@@ -119,7 +119,7 @@ public class AliyunDNSSchedule {
             try {
                 UpdateDomainRecordRequest updateDomainRecordRequest = new UpdateDomainRecordRequest();
                 updateDomainRecordRequest.setRecordId(domainRecord.getRecordId());
-                updateDomainRecordRequest.setRR(mainDomainNameResponse.getRR());
+                updateDomainRecordRequest.setRR(getMainDomainNameResponse.getRR());
                 updateDomainRecordRequest.setType("A");
                 updateDomainRecordRequest.setValue(localAddress);
                 client.getAcsResponse(updateDomainRecordRequest);
